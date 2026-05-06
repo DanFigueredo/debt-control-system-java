@@ -1,6 +1,29 @@
 package projects.debtcontrol;
+/*
+Daniel Figueredo
+04/05/2026 - att 05/05/2026
+Debt Control System
+
+Console application developed in Java to manage personal debts.
+The system allows the user to:
+
+- Register debts
+- List all registered debts
+- Mark debts as paid
+- Remove debts
+- Show the total amount of debts
+
+Project created to practice:
+- Arrays
+- Loops
+- Methods
+- Conditional structures
+- User input with Scanner
+- Basic CRUD logic
+ */
 
 import java.util.Scanner;
+
 
 public class DebtSystem {
     public static void main(String[] args) {
@@ -26,7 +49,6 @@ public class DebtSystem {
             System.out.print("Choose the option: ");
             option = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("-----------------------------------");
 
             if (option == 0) {
                 System.out.println("Finished");
@@ -34,6 +56,7 @@ public class DebtSystem {
             }
 
             if (option == 1){
+                System.out.println("--- Add Debt ---");
                 System.out.print("What is the name of the debt? ");
                 names[count] = scanner.nextLine();
 
@@ -61,6 +84,28 @@ public class DebtSystem {
                 }else{
                     System.out.println("Invalid option");
                 }
+            }
+
+            if (option == 4){
+                System.out.print("Which debt do you want to delete? ");
+                choice = scanner.nextInt();
+                choice = choice - 1;
+                if (choice >= 0 && choice < count) {
+                    for (int i = choice; i < count - 1; i++){
+                        names[i] = names[i+1];
+                        values[i] = values[i+1];
+                        days[i] = days[i+1];
+                        states[i] = states[i + 1];
+                    }
+                    count--;
+                    System.out.println("Debt removed successfully");
+                }else{
+                    System.out.println("Invalid option");
+                }
+            }
+
+            if (option == 5){
+                debtService.totalDebts(values,count);
             }
 
         }//end while
